@@ -16,18 +16,17 @@
 
 % to avoid loading the natbib package, add option nonatbib:
 \usepackage{format}
-\usepackage{commands}
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
 %\usepackage{hyperref}       % hyperlinks
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref} 
 \usepackage{url}            % simple URL typesetting
 \usepackage{booktabs}       % professional-quality tables
 \usepackage{amsfonts}       % blackboard math symbols
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 
-\title{Extended abstract}
+\title{Formatting Instructions Adversarial-ML Course}
 
 % The \author macro works with any number of authors. There are two commands
 % used to separate the names and addresses of multiple authors: \And and \AND.
@@ -40,7 +39,7 @@
 % \author{%
 %   David S.~Hippocampus\thanks{Use footnote for providing further information
 %     about author (webpage, alternative address)---\emph{not} for acknowledging
-%     funding agencies.}
+%     funding agencies.} 
 %   % \And
 %   % Coauthor \\
 %   % Affiliation \\
@@ -63,109 +62,65 @@
 %   % \texttt{email} \\
 % }
 
-\author{Simon Théorêt}
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-    Data augmentation is a key component to training robust models and to
-    prevent overfitting in computer vision. The Fourier perspective
-    ~\citep{yin2020fourier} gave us a better understanding of the processs
-    behind such improvements by showing us the tradeoffs between protecting
-    against corruptions in low frequency and high frequency and the limitations
-    of data augmentation. These insights also raises questions about the bias of
-    gradients towards low frequencies: Does the optimizer and the architecture
-    of a model bias the model to rely on low frequency features. In
-    this work, we investigate the impact of Gaussian data augmentation and
-    adversarial training on a different set of architectures and optmizers. We
-    provide an hypothesis that gradients of adversarially trained models and
-    models trained on Gaussian augmented data are naturally biased towards low
-    frequency features, as they contain more relevant information for
-    classification. To test our hypothesis, we provide an experimental protocol
-    for testing our hypothesis against different architectures and optmizers by
-    computing the accuracy of the trained models on images containing either high
-    frequency features or low frequency features.
+  The abstract paragraph is \emph{optional} for the extended abstract and \emph{mandatory} in the final project report.
 \end{abstract}
 
-\section{Introduction}
-The fourrier perspective introduced by ~\citet{yin2020fourier} paved the way
-for exploring the Fourier space of images' features and how these features are
-used by models. This approach was used to classify features in two categories:
-high frequency and low frequency features. The first category includes features
-such as images' texture, and the second is related to the countours and shapes
-in images, as stated in ~\citet{krishnamachari2023fourier}. Although high
-frequency features are often invisible to the human eye, the Fourier
-perspective showed that these features could be successfully used by
-Convolution Neural Networks (CNN) in image classification. However, high
-frequency features are not robust, as showed by ~\citet{zhang2019interpreting}
-and yet models are often biased toward using these features. On the contrary,
-low frequency features, such as shape, are often the preferred features of
-adversarially trained neural networks or network trained with a Gaussian
-augmented dataset. The Fourier perspective article ~\citet{yin2020fourier}
-limited their experiments to the ResNet architecture. The lack of empirical
-research using different architectures and optmizers prompts the question:
+\section{Guidelines Extended Abstract and Final Project Report}
 
-\emph{Does the architecture and the optimizer influence the bias toward low
-frequency features in adversarially trained models and models trained on
-Gaussian augmented datasets?}
+\subsection{Timeline -- Dates Importantes}
+\begin{itemize}
+    \item March 5th (11:59PM \href{https://www.timeanddate.com/time/zones/aoe}{AoE}): Extended Abstract submission -- Soumission du pré-rapport (\textbf{max 2 pages}).
+    \item April 22th (11:59PM \href{https://www.timeanddate.com/time/zones/aoe}{AoE}): Project Report submission -- Soumission du rapport de projet (\textbf{max 8 pages}).
+    %\item End of April: Project Presentations (Optional if a paper presentation has already been done) -- Présentation des projets (facultative si une présentation de papier à déjà été faite)
+\end{itemize}
 
-% \section{Related works}
-\section{Definitions}
-We use the following notations: $\mathcal{F}: \R^{d_1 \times d_2} \to \C^{d_1
-\times d_2}$ denotes the discrete fourrier transform (DFT) of an image and we
-omit the dimensions of the channels, as every channel is treated independently
-of the other channels. When we visualize the Fourier spectrum, we always shift
-the low frequency components to the center of the spectrum and only show the
-magnitude of the images, not the phase.
+\paragraph{Penalty policy:} 10\% of the grade per 24h late. Example: you submit your extended abstract on March 14th at 1:00 AM (AoE) you get a penalty of 10\%. If you submit March 15th at 2:00 AM (AoE) you get a penalty of 20\%.
 
-To filter components of an image based on their frequency, we use the
-methodology of ~\citet{yin2020fourier}: We set to 0 every point in the Fourier
-spectrum that is not in the square of width $B$ centered at the highest/lowest
-frequency. We then apply the inverse DFT to recover the original image, with
-the low/high frequency components filtered out.
+Note that each time you edit your submission it \emph{removes} the previous timestamp. 
 
-Our Gaussian augmentation method follows the methodology of
-~\citet{yin2020fourier}. We assume that pixels take values in the range
-$[0,1]$. Pixel values are always clipped to that range. Gaussian data
-augmentation with parameters $\sigma$ is defined as the following operation:
-i.i.d. Gaussian noise $\mathcal{N}(0, \tilde{\sigma}^2)$, is applied at each
-iteration and at every pixel. The value of $\tilde{\sigma}^2$ is chosen
-uniformly at random from $[0,\sigma]$.
+\subsection{Details}
+The goal of the extended abstract is to separate the generation and confirmation of hypotheses. This process is inspired by the \href{https://preregister.science/}{Pre-registation experiment NeurIPS 2020 workshop.} The idea is to separate the formulation of a scientific hypothesis to its validation: 
+\begin{center}
+\begin{minipage}{ .9\textwidth}
+\emph{Pre-registration changes the incentives by reviewing [...] before experiments are conducted. The emphasis will be on whether the experiment plan can adequately prove or disprove one (or more) hypotheses. Some results will be negative, and this is welcomed. This way, good ideas that do not work will get welcomed. Finally, the clear separation between hypothesizing and confirmation will raise the statistical significance of the results.}
+\end{minipage}
+\end{center}
+To summarize, the process is the following:
+\begin{itemize}
+    \item Come up with a project (empirical or theoretical), you can take inspiration from \href{https://docs.google.com/spreadsheets/d/1laPRRCjZO7bvG9cEg_juaVNsWXZJkJevuZRRz-otu7c/edit?usp=sharing}{the list of papers relevant for projects}. 
+    The goal here is to pinpoint new questions.
+    \item Write the extended abstract without confirmatory experiments/proofs by motivating this idea. (Providing context and motivations) 
+    \item Run the experiments/work on the proofs and report your results.
+\end{itemize}
 
+    
+\subsection{Pages limits}
 
-\section{Problem statement and related works}
-Our goal is to assert whether or not optimizers and architecture influence the
-bias in the features selection of models trained with a Gaussian augmented
-dataset or adversarially trained. Precedent works have tried to formalize the
-Fourier sensitivity of CNN with the works of ~\citet{krishnamachari2023fourier}
-and gave experimental insights regarding the tunining of models towards certain
-frequencies, thanks to the works of ~\citet{krishnamachari2023fourier,
-geirhos2022imagenettrained, yin2020fourier, mo2022adversarial}. Notably, the
-works of ~\citet{park2022vision} demonstrated that the multi-head
-self-attentions, such as ViT reduce high frquency signals, while CNN amplify
-them.
+The extended abstract should be \textbf{maximum 2 pages long} (not including refs) and the final report should be \textbf{maximum 8 pages long} (not including refs). You can also have an appendix for proofs and additional results but the focus of the evaluation will be on the 8 pages of the main text.
+\textbf{Stephen Boyd LaTeX and project pieces of advice can be found \href{https://youtu.be/Kwli6FkYQYY?t=164}{here}}.  
+Spelling can be checked using \href{https://www.grammarly.com/}{grammarly}.
 
-\section{Proposed experimental protocol}
-We are planning on using two different architectures for our experiments: the
-ALL-CNN architecture ~\citet{springenberg2015allcnn}, which is mostly
-convolution layers stacked on top of each others, and the mobileViT architecture,
-which introduce some transformer modules into the architecture ~\citet{mehta2022mobilevit}. We do not
-include any pure ViT (vision transformers) models, due to their heavy
-computational demands.
+\subsection{Code}
 
-Our experiments consists of training a total of 12 models on the MNIST dataset
-and evaluating the performance on the validation set with only high frequency
-features or low frenquecy features. For both the CNN architecture and the ViT
-architecture, each are trained on the default MNIST dataset, adversarially
-trained on the MNIST dataset and trained on the MNIST dataset with Gaussian
-augmentation. This procedure is repeated for two Stochastic gradient descent
-with momentum and AdamW. Both of these optimizers were used in the original
-training of ALL-CNN and MobileViT models, respectively.
+The code can be an important aspect of the project. If it is the case it \emph{must} be part of the project report. The source can be shared with the project report but it is strongly advised to share a Github repository (or any other version control system) containing the frequent commits of code. Here is a summary of the guidelines:
+\begin{enumerate}
+    \item A good practice is to start a Github repository as soon as possible and to frequently commit you updates on the code.
+    \item I advise you to use a strong IDE (integrated development environment). My advice is \href{https://www.jetbrains.com/community/education/#students}{Pycharm} (you can get a free license as a student) or \href{https://code.visualstudio.com/}{Visual Studio Code}.
+    \item It is fine to use some open-source code if you are transparent about it! (If you pretend it is your own code it is considered plagiarism) 
+    \item 
+	If you need advice about the coding workflow/good practices come to the office hours.
+\end{enumerate}
 
-To accomplish these experiments, we have access to Google Colab Pro account and
-a NVDIA GTX 3060 GPU.
+Regarding the project contributions, doing a new experiment that is well-motivated and requires the design of some new code is a sufficient contribution to the project. The motivations and descriptions of the new experiment(s) should be presented in the extended abstract.
 
+\subsection{Resources}
+
+In order to access the feasibility of your project. You should roughly indicate the computational resources you will have access to (cluster, personal GPU, collab,...)
 % \section{General formatting instructions}
 % \label{gen_inst}
 
@@ -393,8 +348,8 @@ a NVDIA GTX 3060 GPU.
 
 % \section*{Broader Impact}
 
-% Authors are encouraged to include a statement of the broader impact of their work, including its ethical aspects and future societal consequences.
-% Authors should discuss both positive and negative outcomes, if any. For instance, authors should discuss a)
+% Authors are encouraged to include a statement of the broader impact of their work, including its ethical aspects and future societal consequences. 
+% Authors should discuss both positive and negative outcomes, if any. For instance, authors should discuss a) 
 % who may benefit from this research, b) who may be put at disadvantage from this research, c) what are the consequences of failure of the system, and d) whether the task/method leverages
 % biases in the data. If authors believe this is not applicable to them, authors can simply state this.
 
@@ -424,7 +379,16 @@ a NVDIA GTX 3060 GPU.
 %recall at excitatory recurrent synapses and cholinergic modulation in rat
 %hippocampal region CA3. {\it Journal of Neuroscience} {\bf 15}(7):5249-5262.
 
-\bibliography{extended_abstract}
+\section*{References with bibtex}
+{\bf Note that the Reference section does not count towards the number of pages of content that are allowed.}
+Citations within the text must include the author's last name and year e.g.,~\citep{MachineLearningI}. Be sure that the sentence reads correctly if the citation is deleted: e.g., instead of “As described by~\citep{DudaHart2nd}, we first frobulate the widgets,” write “As described by~\citet{DudaHart2nd}, we first frobulate the widgets.” The references listed at the end of the paper can follow any style as long as it is used consistently.
+
+\bibliography{example_paper}
 \bibliographystyle{abbrvnat}
+
+
+\appendix 
+\section{First Section of the Appendix}
+You can put technical proofs and additional experiments here.
 
 \end{document}
