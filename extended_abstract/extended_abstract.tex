@@ -111,13 +111,18 @@ frequency features in adversarially trained models and models trained on
 Gaussian augmented datasets?}
 
 % \section{Related works}
-\section{Definitions}
+\section{Preliminaries}
 We use the following notations: $\mathcal{F}: \R^{d_1 \times d_2} \to \C^{d_1
-\times d_2}$ denotes the discrete fourrier transform (DFT) of an image and we
+\times d_2}$ denotes the discrete Fourier transform (DFT) of an image and we
 omit the dimensions of the channels, as every channel is treated independently
-of the other channels. When we visualize the Fourier spectrum, we always shift
-the low frequency components to the center of the spectrum and only show the
-magnitude of the images, not the phase.
+of the other channels. For an image of size $N \times N$, the discrete fourier
+transform is defined as
+\begin{equation*}
+    \mathcal{F}(k,l) = \sum_{i=0}^{N-1} \sum_{j=0}^{N-1} f(i,j) \exp^{ -i2\pi \left(\frac{ki}{N}+ \frac{lj}{N}\right)},
+\end{equation*}
+where $f(i,j)$ the pixel at position $i,j$ of an image. When we visualize the
+Fourier spectrum, we always shift the low frequency components to the center of
+the spectrum and only show the magnitude of the images, not the phase.
 
 To filter components of an image based on their frequency, we use the
 methodology of ~\citet{yin2020fourier}: We set to 0 every point in the Fourier
